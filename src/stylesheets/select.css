@@ -1,0 +1,125 @@
+.selectNative,
+.selectCustom {
+  position: relative;
+}
+
+.selectCustom {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (hover: hover) {
+  .selectCustom {
+    display: block;
+  }
+  .selectNative:focus + .selectCustom {
+    display: none;
+  }
+}
+/* Add the focus states too, They matter, always! */
+.selectNative:focus,
+.selectCustom.isActive .selectCustom-trigger {
+  outline: auto;
+}
+
+.select {
+  position: relative;
+}
+
+.selectLabel {
+  display: block;
+  margin-bottom: 0.4rem;
+  margin-right: 0.6rem;
+  white-space: nowrap;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.selectWrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.selectNative,
+.selectCustom-trigger {
+  padding: 0.2rem 1rem;
+  border: 1px solid black;
+  border-radius: 0.4rem;
+}
+
+.selectCustom-trigger {
+  position: relative;
+  display: block;
+  padding-right: 2rem;
+  width: 100%;
+  min-width: 90px;
+  height: 100%;
+  background-color: #fff;
+  line-height: 1.2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.selectCustom-trigger::after {
+  content: "▾";
+  position: absolute;
+  right: 0.5rem;
+}
+
+.selectCustom-options {
+  position: absolute;
+  display: none;
+  top: 2.2rem;
+  left: 0;
+  width: 100%;
+  max-height: 230.4px;
+  border: 1px solid black;
+  border-radius: 0.4rem;
+  background-color: #fff;
+  z-index: 1;
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.selectCustom.isActive .selectCustom-options {
+  display: block;
+}
+
+.selectCustom-option {
+  position: relative;
+  padding: 0.4rem 2rem 0.4rem 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  scroll-snap-align: start;
+}
+
+.selectCustom-option.isHover,
+.selectCustom-option:hover {
+  background-color: #f0f0f0;
+  cursor: default;
+}
+
+.selectCustom-option:not(:last-of-type)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0.5rem;
+  right: 0.5rem;
+  border-bottom: 1px solid black;
+}
+
+.selectCustom-option.isActive::before {
+  content: "✓";
+  position: absolute;
+  right: 5%;
+}
