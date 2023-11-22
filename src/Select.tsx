@@ -157,6 +157,7 @@ export default function Select({ inputsState, inputState, setInputsState, showVa
       </span>
       <div className="selectWrapper">
         <select
+          data-testid="native-select"
           ref={elSelectNative}
           className="selectNative js-selectNative"
           aria-labelledby={id}
