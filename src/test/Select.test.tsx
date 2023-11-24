@@ -11,37 +11,41 @@ import { useState } from "react";
 
 import Select from "../Select";
 
-beforeEach(() => {
-  function App() {
-    const [state, setState] = useState({ number: "" });
-
-    return (
-      <Select
-        inputsState={state}
-        inputState="number"
-        setInputsState={setState}
-        id="number"
-        label="Select a number"
-        placeholder="Choose"
-        options={options}
-      />
-    );
-  }
-
-  const options = [
-    { value: "1", labor: "Un" },
-    { value: "2", labor: "Deux" },
-  ];
-
-  render(<App />);
-});
-
-it("Should be rendered.", () => {
-  const label = screen.queryByText(/Select a number/i);
-  expect(label).toBeInTheDocument();
-});
-
 describe("Given I am an user.", () => {
+  beforeEach(() => {
+    function App() {
+      const [state, setState] = useState({ number: "" });
+
+      return (
+        <Select
+          inputsState={state}
+          inputState="number"
+          setInputsState={setState}
+          id="number"
+          label="Select a number"
+          placeholder="Choose"
+          options={options}
+          showValidation={false}
+          validationMsg="warning"
+        />
+      );
+    }
+
+    const options = [
+      { value: "1", labor: "One" },
+      { value: "2", labor: "Two" },
+    ];
+
+    render(<App />);
+  });
+
+  test("Then component is displayed to me without any warning message.", () => {
+    const label = screen.queryByText(/Select a number/i);
+    const warning = screen.queryAllByText("warning");
+    expect(label).toBeInTheDocument();
+    expect(warning.length).toBe(0);
+  });
+
   describe("When I click on the custom select.", () => {
     beforeEach(async () => {
       const selectCustomTrigger = document.getElementsByClassName("selectCustom-trigger")[0] as HTMLDivElement;
@@ -89,8 +93,8 @@ describe("Given I am an user.", () => {
   describe("When I select an option using the custom select.", () => {
     test("Then the component is updated.", async () => {
       const selectCustomOptions = document.getElementsByClassName("selectCustom-option");
-      const un = selectCustomOptions[0];
-      await userEvent.click(un);
+      const one = selectCustomOptions[0];
+      await userEvent.click(one);
 
       // Is the select input value updated ?
       const selectNative = document.getElementsByClassName("selectNative")[0] as HTMLSelectElement;
@@ -98,14 +102,14 @@ describe("Given I am an user.", () => {
 
       // Is the custom select div textContent updated ?
       const selectCustomTrigger = document.getElementsByClassName("selectCustom-trigger")[0] as HTMLDivElement;
-      expect(selectCustomTrigger.textContent).toBe("Un");
+      expect(selectCustomTrigger.textContent).toBe("One");
     });
 
     describe("When I click on the custom select.", () => {
       test("Then one option is showcased (gray background) and designated ('✓').", async () => {
         const selectCustomOptions = document.getElementsByClassName("selectCustom-option");
-        const un = selectCustomOptions[0];
-        await userEvent.click(un);
+        const one = selectCustomOptions[0];
+        await userEvent.click(one);
 
         const selectCustomTrigger = document.getElementsByClassName("selectCustom-trigger")[0] as HTMLDivElement;
         await userEvent.click(selectCustomTrigger);
@@ -121,31 +125,33 @@ describe("Given I am an user.", () => {
         expect(isActive).toBe(1);
       });
 
-      beforeEach(async () => {
-        const selectCustomOptions = document.getElementsByClassName("selectCustom-option");
-        const un = selectCustomOptions[0];
-        await userEvent.click(un);
-        const selectCustomTrigger = document.getElementsByClassName("selectCustom-trigger")[0] as HTMLDivElement;
-        await userEvent.click(selectCustomTrigger);
-      });
-
       describe("When I press the 'ArrowDown' key to select the next value then press 'Enter'.", async () => {
-        test("The value of the component should be updated to 'Deux'.", async () => {
+        test("The value of the component should be updated to 'Two'.", async () => {
+          const selectCustomOptions = document.getElementsByClassName("selectCustom-option");
+          const one = selectCustomOptions[0];
+          await userEvent.click(one);
+          const selectCustomTrigger = document.getElementsByClassName("selectCustom-trigger")[0] as HTMLDivElement;
+          await userEvent.click(selectCustomTrigger);
+
           fireEvent.keyDown(document, { key: "ArrowDown" });
           fireEvent.keyDown(document, { key: "Enter" });
 
-          const selectCustomTrigger = document.getElementsByClassName("selectCustom-trigger")[0] as HTMLDivElement;
-          expect(selectCustomTrigger.textContent).toBe("Deux");
+          expect(selectCustomTrigger.textContent).toBe("Two");
         });
       });
 
       describe("When I press the 'ArrowUp' key to select the previous value then press 'Enter'.", () => {
-        test("The value of the component should be updated to 'Un'.", async () => {
+        test("The value of the component should be updated to 'One'.", async () => {
+          const selectCustomOptions = document.getElementsByClassName("selectCustom-option");
+          const two = selectCustomOptions[1];
+          await userEvent.click(two);
+          const selectCustomTrigger = document.getElementsByClassName("selectCustom-trigger")[0] as HTMLDivElement;
+          await userEvent.click(selectCustomTrigger);
+
           fireEvent.keyDown(document, { key: "ArrowUp" });
           fireEvent.keyDown(document, { key: "Enter" });
 
-          const selectCustomTrigger = document.getElementsByClassName("selectCustom-trigger")[0] as HTMLDivElement;
-          expect(selectCustomTrigger.textContent).toBe("Un");
+          expect(selectCustomTrigger.textContent).toBe("One");
         });
       });
     });
@@ -153,13 +159,13 @@ describe("Given I am an user.", () => {
     describe("When I select another option.", () => {
       test("Then the first option is no longer designated ('✓').", async () => {
         const selectCustomOptions = document.getElementsByClassName("selectCustom-option");
-        const un = selectCustomOptions[0];
-        const deux = selectCustomOptions[1];
+        const one = selectCustomOptions[0];
+        const two = selectCustomOptions[1];
 
-        await userEvent.click(un);
-        await userEvent.click(deux);
+        await userEvent.click(one);
+        await userEvent.click(two);
 
-        expect(un.classList.contains("isActive")).not.toBeTruthy();
+        expect(one.classList.contains("isActive")).not.toBeTruthy();
       });
     });
   });
@@ -167,10 +173,45 @@ describe("Given I am an user.", () => {
   describe("When I select the first option of the native select.", () => {
     test("Then this option is assigned to the custom select.", async () => {
       const selectNative = screen.getByTestId("native-select") as HTMLSelectElement;
-      await userEvent.selectOptions(selectNative, ["Un"]);
+      await userEvent.selectOptions(selectNative, ["One"]);
 
       const selectCustomTrigger = document.getElementsByClassName("selectCustom-trigger")[0] as HTMLDivElement;
-      expect(selectCustomTrigger.textContent).toBe("Un");
+      expect(selectCustomTrigger.textContent).toBe("One");
+    });
+  });
+});
+
+describe("When the component is used in a context where choosing an option is required.", () => {
+  describe("When I don't choose any option.", () => {
+    test("Then a warning message appears.", async () => {
+      function App() {
+        const [state, setState] = useState({ number: "" });
+
+        return (
+          <Select
+            inputsState={state}
+            inputState="number"
+            setInputsState={setState}
+            id="number"
+            label="Select a number"
+            placeholder="Choose"
+            options={options}
+            showValidation={true}
+            validationMsg="warning"
+          />
+        );
+      }
+
+      const options = [
+        { value: "1", labor: "One" },
+        { value: "2", labor: "Two" },
+      ];
+
+      render(<App />);
+      const label = screen.queryByText(/Select a number/i);
+      const warning = screen.queryAllByText("warning");
+      expect(label).toBeInTheDocument();
+      expect(warning.length).toBe(1);
     });
   });
 });
