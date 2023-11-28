@@ -4,7 +4,7 @@
 
 # React Custom Select Input
 
-This package is part of a student project, translating an original idea by Sandrina Pereira (https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/).
+This package is part of a student project, translating an [original idea](https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/) by Sandrina Pereira.
 
 This library aims to provide a select input which can be styled without sacrificing accessibility.
 To achieve this, a custom element is superimposed on a native input.
