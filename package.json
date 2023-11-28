@@ -1,11 +1,22 @@
 {
-  "name": "react-select",
+  "name": "caver-react-select",
+  "description": "A select input which can be styled without sacrificing accessibility.",
   "version": "1.0.0",
   "author": "https://github.com/ClementAver",
+  "repository": "https://github.com/ClementAver/react-select",
   "type": "module",
+  "keywords": [
+    "react",
+    "react-component",
+    "input",
+    "select"
+  ],
   "scripts": {
     "test": "vitest",
     "coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.4",
@@ -15,7 +26,6 @@
     "@vitejs/plugin-react": "^4.2.0",
     "@vitest/coverage-v8": "^0.34.6",
     "jsdom": "^22.1.0",
-    "react": "^18.2.0",
     "typescript": "^5.3.2",
     "vitest": "^0.34.6"
   }

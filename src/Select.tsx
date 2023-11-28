@@ -9,15 +9,15 @@ export default function Select({ inputsState, inputState, setInputsState, showVa
     This is a controlled input component.
 
     props :
-      *a state - object;
-      *a string representing the state property which will be assigned;
-      *a setter used to do the above;
-      *a boolean to know whenever the warning message should be displayed or not;
-      *an id;
-      *a label;
-      *a placeholder string;
-      *an array of objects representing the values and names of the proposed options;
-      *a string representing the warning message.
+      *inputsState - a state - type : object;
+      *inputState - a string representing the state property which will be assigned;
+      *setInputsState - a setter used to do the above;
+      *showValidation - a boolean to know whenever the warning message should be displayed or not;
+      *id - type : string;
+      *label - type : string;
+      *placeholder - type : string;
+      *options - an array of objects representing the values and names of the proposed options - type : { value: string; labor: string; };
+      *validationMsg - a string representing the warning message.
   */
 
   // The main div for the native select element.

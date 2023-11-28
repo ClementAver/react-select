@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1700809394633" clover="3.2.0">
-  <project timestamp="1700809394633" name="All files">
+<coverage generated="1701073120610" clover="3.2.0">
+  <project timestamp="1701073120610" name="All files">
     <metrics statements="248" coveredstatements="248" conditionals="35" coveredconditionals="35" methods="12" coveredmethods="12" elements="295" coveredelements="295" complexity="0" loc="248" ncloc="248" packages="1" files="1" classes="1"/>
     <file name="Select.tsx" path="/home/caver/Documents/react-select/src/Select.tsx">
       <metrics statements="248" coveredstatements="248" conditionals="35" coveredconditionals="35" methods="12" coveredmethods="12"/>
