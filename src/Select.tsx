@@ -241,7 +241,7 @@ export default function Select({ inputsState, inputState, setInputsState, showVa
             ))}
           </div>
         </div>
-        {showValidation && <p className="native-select__invalid-msg invalid">{validationMsg}</p>}
+        {showValidation && <p className="invalid">{validationMsg}</p>}
       </div>
     </>
   );
