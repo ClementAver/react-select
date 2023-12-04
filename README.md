@@ -1,5 +1,5 @@
 ![coverage](https://img.shields.io/badge/for-React-blue)
-![coverage](https://img.shields.io/badge/version-1.0.0-yellow)
+![coverage](https://img.shields.io/badge/version-1.0.4-yellow)
 ![coverage](https://img.shields.io/badge/coverage-100-green)
 
 # React Custom Select Input
