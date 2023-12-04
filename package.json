@@ -1,9 +1,13 @@
 {
   "name": "caver-react-select",
   "description": "A select input which can be styled without sacrificing accessibility.",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "author": "https://github.com/ClementAver",
-  "repository": "https://github.com/ClementAver/react-select",
+  "homepage": "https://github.com/ClementAver/react-select",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ClementAver/react-select.git"
+  },
   "type": "module",
   "main": "./src/Select.tsx",
   "types": "./src/Select.tsx",
